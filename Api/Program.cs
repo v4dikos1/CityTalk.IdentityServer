@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Persistence;
 using System.Reflection;
+using Infrastructure;
 using WebApi.StartupConfigurations;
 
-//var assembly = Assembly.Load("Infrast");
 var builder = WebApplication.CreateBuilder(args);
+
+const int passwordLengthRequired = 8;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var connectionString = builder.Configuration.GetConnectionString("CityTalkIdentityContext");
 
 builder.Services.RegisterDataAccessServices(connectionString!, builder.Environment.IsDevelopment());
+builder.Services.RegisterInfrastructureServices(passwordLengthRequired);
 builder.Services.AddIdentityServerConfig(connectionString!);
-
-const int passwordLengthRequired = 8;
 builder.Services.AddAspIdentityConfig(passwordLengthRequired);
 builder.Services.AddAuthenticationConfig(builder.Configuration);
 builder.Services.AddCorsConfig();
