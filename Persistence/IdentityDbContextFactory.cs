@@ -9,7 +9,7 @@ public class IdentityDbContextFactory : IDesignTimeDbContextFactory<IdentityDbCo
     {
         var optionsBuilder = new DbContextOptionsBuilder<IdentityDbContext>();
         optionsBuilder.UseNpgsql(
-            "Host=localhost;Database=CityTalk.Identity;Username=postgres;Password=fsfsfsfsfs;Include Error Detail=true");
+            "Host=localhost;Database=CityTalk.Identity;Username=postgres;Password=bvdgdg;Include Error Detail=true");
         return new IdentityDbContext(optionsBuilder.Options);
     }
 }
